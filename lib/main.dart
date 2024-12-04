@@ -19,6 +19,9 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool entrar = true;
 
+  final _formKey = GlobalKey<FormState>();
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +42,7 @@ class _LoginState extends State<Login> {
         child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           child: Form(
+            key: _formKey,
             child: Column(
               children: [
                 const Icon(
@@ -48,6 +52,22 @@ class _LoginState extends State<Login> {
                 ),
                 const SizedBox(height: 30),
                 TextFormField(
+                  validator: (String? value){
+                    if(value == null){
+                      return "O campo E-mail precisa ser preenchido";
+                    }
+                    if(value.length < 5){
+                      return "O campo E-mail precisa ter o mínimo de 5 caracteres";
+                    }
+                    if(!value.contains("@"){
+                      return "O campo E-mail precisa ter o arroba ( @ )";
+                    }
+                    if(!value.contains("."){
+                      return "O campo E-mail precisa ter o ponto ( . )";
+                    }
+                    
+                    return null;
+                  },
                   decoration: InputDecoration(
                     hintText: "E-mail",
                     fillColor: Colors.white,
@@ -69,6 +89,17 @@ class _LoginState extends State<Login> {
                 ),
                 const SizedBox(height: 5),
                 TextFormField(
+                  TextFormField(
+                  validator: (String? value){
+                    if(value == null){
+                      return "O campo E-senha precisa ser preenchido";
+                    }
+                    if(value.length < 8){
+                      return "O campo senha precisa ter o mínimo de 8 caracteres";
+                    }
+                    
+                    return null;
+                  },
                   decoration: InputDecoration(
                     hintText: "Senha",
                     fillColor: Colors.white,
