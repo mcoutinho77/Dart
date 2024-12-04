@@ -92,7 +92,7 @@ class _LoginState extends State<Login> {
                   TextFormField(
                   validator: (String? value){
                     if(value == null){
-                      return "O campo E-senha precisa ser preenchido";
+                      return "O campo senha precisa ser preenchido";
                     }
                     if(value.length < 8){
                       return "O campo senha precisa ter o mínimo de 8 caracteres";
@@ -126,6 +126,16 @@ class _LoginState extends State<Login> {
                       //////
                       const SizedBox(height: 5),
                       TextFormField(
+                        validator: (String? value){
+                          if(value == null){
+                            return "O campo confirme a senha precisa ser preenchido";
+                          }
+                          if(value.length < 8){
+                            return "O campo confirme a senha precisa ter o mínimo de 8 caracteres";
+                          }
+                          
+                          return null;
+                        },
                         decoration: InputDecoration(
                           hintText: "Confirme a senha",
                           fillColor: Colors.white,
@@ -150,6 +160,16 @@ class _LoginState extends State<Login> {
                       /////
                       const SizedBox(height: 5),
                       TextFormField(
+                        validator: (String? value){
+                          if(value == null){
+                            return "O campo nome precisa ser preenchido";
+                          }
+                          if(value.length < 3){
+                            return "O campo nome precisa ter o mínimo de 3 caracteres";
+                          }
+                          
+                          return null;
+                        },
                         decoration: InputDecoration(
                           hintText: "Nome",
                           fillColor: Colors.white,
@@ -179,7 +199,9 @@ class _LoginState extends State<Login> {
                   child: SizedBox(
                     height: 35,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        botaoEntrar();
+                      },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: (entrar) ? const Colors.red : Colors.deepOrangeAccent,
                           shape: RoundedRectangleBorder(
@@ -214,6 +236,14 @@ class _LoginState extends State<Login> {
           ),
         ),
       ),
-    );
+    ); // Scaffold
+  }
+  botaoEntrar() {
+    if(_formKey.currenState!.validate()) {
+      print("Formulário funcionando");
+    }
+    else{
+      print("Formulário NÃO funcionando");
+    }
   }
 }
